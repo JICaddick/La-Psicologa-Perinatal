@@ -7,7 +7,7 @@ export default function Home({ products }) {
     <div className="text-3xl">
       <ProductList products={ products } />
    </div>
-  )
+  ) 
 }
 
 export async function getStaticProps() {
