@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
 
         </a>
       </Link>
-  )
+  ) 
 }
 
 export default ProductCard 
