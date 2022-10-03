@@ -8,7 +8,7 @@ export default function Home({ products }) {
       <ProductList products={ products } />
    </div>
   ) 
-}
+} 
 
 export async function getStaticProps() {
   const products = await getProductsInCollection()
