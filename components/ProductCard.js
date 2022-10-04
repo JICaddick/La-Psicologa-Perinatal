@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
   
   return (
       <Link
-        href={`/product/${handle}`}
+        href={`/products/${handle}`}
       >
         <a className="group">
               <div className="w-full bg-gray-200 rounded-3xl overflow-hidden">
