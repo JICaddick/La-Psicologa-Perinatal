@@ -35,3 +35,5 @@ export async function getStaticProps({ params }) {
     },
   };
 }
+
+// deploy often and early to make sure nothing's broken.
