@@ -13,7 +13,7 @@ export default function ProductPageContent({ product }) {
           objectFit="cover"/>
         </div>
       </div>  
-      <ProductForm />
+      <ProductForm product={product} />
     </div>
   )
 }
