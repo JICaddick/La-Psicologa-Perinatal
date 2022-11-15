@@ -1,15 +1,18 @@
 import { createContext, useState, useEffect } from 'react'
-import { createCheckout } from '../lib/shopify'
+import { createCheckout, updateCheckout } from '../lib/shopify'
 
 const CartContext = createContext()
 
 export default function ShopProvider({ children }) {
+
     const [cart, setCart] = useState([])
     const [cartOpen, setCartOpen] = useState(false)
     const [checkoutId, setCheckoutId] = useState('')
     const [checkoutUrl, setCheckoutUrl] = useState('')
 
     async function addToCart(newItem) {
+        setCartOpen(true)
+        
         if (cart.length === 0) {
             setCart([newItem])
             // the following is coming from our product form where we create our object with id and variant quanitty. 
@@ -18,7 +21,8 @@ export default function ShopProvider({ children }) {
             setCheckoutId(checkout.id)
             setCheckoutUrl(checkout.webUrl)
 
-            localStorage.setItem("checkout_id", JSON.stringify([newItem, checkout]))
+            localStorage.setItem('checkout_id', JSON.stringify([newItem, checkout]))
+
         } else {
             let newCart = [...cart]
 // here w're checking if the id of the new item already exists in the car. It if does exist we'll increase the quantity of the variant quantity in the cart. If it doesn't already exist we'll add it to the cart and set the new cart to the state.
@@ -32,10 +36,26 @@ export default function ShopProvider({ children }) {
             })
 // below we're updating the cart object and the checkout object.
             setCart(newCart) 
+
             const newCheckout = await updateCheckout(checkoutId, newCart)
-            localStorage.setItem("checkout_id", JSON.stringify([newCart, newCheckout]))
+            localStorage.setItem('checkout_id', JSON.stringify([newCart, newCheckout]))
         }
     }
+
+    //     async function removeCartItem(itemToRemove) {
+    //     // to remove items we use built in js filter method 
+    //     const updatedCart = cart.filter(item => item.id !== itemToRemove)
+    //     //sets updated cart to cart, localstorage, and checkout 
+    //     setCart(updatedCart)
+    //     const newCheckout = await updateCheckout(checkoutId, updatedCart)
+
+    //     localStorage.setItem('checkout_id', JSON.stringify([updatedCart, newCheckout]))
+    //     //if card is less then one the it closes automatically 
+    //     if (cart.length === 1) {
+    //         setCartOpen(false)
+    //     }
+      
+    // }
 
   return (
       <CartContext.Provider value={{
