@@ -9,6 +9,22 @@ export default function ShopProvider({ children }) {
     const [cartOpen, setCartOpen] = useState(false)
     const [checkoutId, setCheckoutId] = useState('')
     const [checkoutUrl, setCheckoutUrl] = useState('')
+// the empty array in useEffect means the function will only trigger once.
+    useEffect(() => {
+        if (localStorage.checkout_id) {
+            // we're parsing because in addToCart we stringify the checkoutId. We're turning it back into a JSON object. 
+           const cartObject = JSON.parse(localStorage.checkout_id)
+// if there's only one item in the cart, we're going to set the cart to the cartObject. If there's more than one item, we're going to spread the cartObject into the cart.
+            if (cartObject[0].id) {
+                setCart([cartObject[0]])
+            }   else if (cartObject[0].length > 0) {
+                setCart(...[cartObject[0]])
+            }
+            
+            setCheckoutId(cartObject[1].id)
+            setCheckoutUrl(cartObject[1].webUrl)
+        }
+    }, [])
 
     async function addToCart(newItem) {
         setCartOpen(true)
