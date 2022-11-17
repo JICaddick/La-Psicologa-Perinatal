@@ -9,7 +9,12 @@ import Link from "next/link"
 export default function MiniCart({ cart }) {
     const cancelButtonRef = useRef()
 
-    const { cartOpen, setCartOpen, checkoutUrl, removeCartItem, } = useContext(CartContext)
+    const {
+      cartOpen,
+      setCartOpen,
+      checkoutUrl,
+      removeCartItem,
+    } = useContext(CartContext)
     // if there are items in the cart, we'll map through them and create a list of items. We'll multiply the price by the quantity to get the total price for each item.
     let cartTotal = 0
     cart.map(item => {

@@ -151,7 +151,7 @@ export default function ShopProvider({ children }) {
         checkoutUrl,
         removeCartItem,
         clearCart,
-        // cartLoading,
+        cartLoading,
         incrementCartItem,
         decrementCartItem,
       }}
