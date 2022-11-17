@@ -3,12 +3,13 @@ import { Dialog, Transition } from "@headlessui/react"
 import { XIcon } from "@heroicons/react/outline"
 import Image from "next/image"
 import { CartContext } from "../context/shopContext"
-import { formatter } from "../utils/helpers"
+import { formatter } from "../utils/helpers"  
+import Link from "next/link"
 
 export default function MiniCart({ cart }) {
     const cancelButtonRef = useRef()
 
-    const { cartOpen, setCartOpen, checkoutUrl } = useContext(CartContext)
+    const { cartOpen, setCartOpen, checkoutUrl, removeCartItem, } = useContext(CartContext)
     // if there are items in the cart, we'll map through them and create a list of items. We'll multiply the price by the quantity to get the total price for each item.
     let cartTotal = 0
     cart.map(item => {
@@ -17,7 +18,7 @@ export default function MiniCart({ cart }) {
 
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
-          <Dialog
+      <Dialog
         initialFocus={cancelButtonRef}
         as="div"
         className="fixed z-50 inset-0 overflow-hidden"
@@ -57,7 +58,7 @@ export default function MiniCart({ cart }) {
                           Shopping cart
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
-                        <button
+                          <button
                             ref={cancelButtonRef}
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
@@ -93,9 +94,14 @@ export default function MiniCart({ cart }) {
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <a href={product.href}>
-                                          {product.title}
-                                        </a>
+                                        <Link
+                                          href={`/products/${product.handle}`}
+                                          passHref
+                                        >
+                                          <a onClick={() => setCartOpen(false)}>
+                                            {product.title}
+                                          </a>
+                                        </Link>
                                       </h3>
                                       <p className="ml-4">
                                         {formatter.format(product.variantPrice)}
@@ -105,15 +111,39 @@ export default function MiniCart({ cart }) {
                                       {product.variantTitle}
                                     </p>
                                   </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">
-                                      Qty {product.variantQuantity}
-                                    </p>
-
+                                  <div className="flex items-end justify-between flex-1 text-sm">
+                                    {/* <p className="text-gray-500">Qty {product.variantQuantity}</p> */}
+                                    <div className={`border`}>
+                                      <button
+                                        className="px-2"
+                                        onClick={() =>
+                                          decrementCartItem(product)
+                                        }
+                                        disabled={cartLoading}
+                                      >
+                                        -
+                                      </button>
+                                      <span className="px-2 border-l border-r">
+                                        {product.variantQuantity}
+                                      </span>
+                                      <button
+                                        className="px-2"
+                                        onClick={() =>
+                                          incrementCartItem(product)
+                                        }
+                                        disabled={cartLoading}
+                                      >
+                                        +
+                                      </button>
+                                    </div>
                                     <div className="flex">
                                       <button
+                                        onClick={() =>
+                                          removeCartItem(product.id)
+                                        }
                                         type="button"
-                                        className="text-gray-500 hover:text-gray-800"
+                                        className="font-medium text-gray-500 hover:text-gray-800"
+                                        disabled={cartLoading}
                                       >
                                         Remove
                                       </button>
