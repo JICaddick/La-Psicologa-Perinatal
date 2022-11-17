@@ -12,8 +12,10 @@ export default function MiniCart({ cart }) {
     const {
       cartOpen,
       setCartOpen,
-      checkoutUrl,
+      checkoutUrl,  
       removeCartItem,
+      // incrementCartItem,
+      // decrementCartItem,
     } = useContext(CartContext)
     // if there are items in the cart, we'll map through them and create a list of items. We'll multiply the price by the quantity to get the total price for each item.
     let cartTotal = 0
@@ -124,7 +126,7 @@ export default function MiniCart({ cart }) {
                                         onClick={() =>
                                           decrementCartItem(product)
                                         }
-                                        disabled={cartLoading}
+                                        // disabled={cartLoading}
                                       >
                                         -
                                       </button>
@@ -136,7 +138,7 @@ export default function MiniCart({ cart }) {
                                         onClick={() =>
                                           incrementCartItem(product)
                                         }
-                                        disabled={cartLoading}
+                                        // disabled={cartLoading}
                                       >
                                         +
                                       </button>
@@ -148,7 +150,7 @@ export default function MiniCart({ cart }) {
                                         }
                                         type="button"
                                         className="font-medium text-gray-500 hover:text-gray-800"
-                                        disabled={cartLoading}
+// 
                                       >
                                         Remove
                                       </button>
