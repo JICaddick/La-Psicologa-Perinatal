@@ -28,8 +28,7 @@ export default function ShopProvider({ children }) {
 
     async function addToCart(addedItem) {
         // the following opens the cart every time an item is added.
-        const newItem = { ...addedItem }
-        console.log(newItem)    
+        const newItem = { ...addedItem }  
         setCartOpen(true)
         
         if (cart.length === 0) {

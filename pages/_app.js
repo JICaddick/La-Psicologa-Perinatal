@@ -1,4 +1,7 @@
 import 'tailwindcss/tailwind.css'
+import 'swiper/swiper.scss'
+import 'swiper/components/navigation/navigation.scss'
+import 'swiper/components/pagination/pagination.scss'
 import Layout from '../components/Layout'
 import ShopProvider from '../context/shopContext'
 // using the router allows our dynamic product pages to add invividual products to the cart. We don't need to save the state on each one. 

@@ -23,7 +23,6 @@ export default function MiniCart({ cart }) {
         cartTotal += item?.variantPrice * item?.variantQuantity
     })
 
-  console.log(cart)
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
       <Dialog
@@ -80,7 +79,10 @@ export default function MiniCart({ cart }) {
 
                       <div className="mt-8">
                         <div className="flow-root">
-                          <ul
+                          {
+                            cart.length > 0 ?
+                              
+                              <ul
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
@@ -101,7 +103,7 @@ export default function MiniCart({ cart }) {
                                 <div className="ml-4 flex flex-1 flex-col">
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
+                                      <h3>\
                                         <Link
                                           href={`/products/${product.handle}`}
                                           passHref
@@ -127,7 +129,6 @@ export default function MiniCart({ cart }) {
                                         onClick={() =>
                                           decrementCartItem(product)
                                         }
-                                        // disabled={cartLoading}
                                       >
                                         -
                                       </button>
@@ -139,7 +140,6 @@ export default function MiniCart({ cart }) {
                                         onClick={() =>
                                           incrementCartItem(product)
                                         }
-                                        // disabled={cartLoading}
                                       >
                                         +
                                       </button>
@@ -151,7 +151,6 @@ export default function MiniCart({ cart }) {
                                         }
                                         type="button"
                                         className="font-medium text-gray-500 hover:text-gray-800"
-// 
                                       >
                                         Remove
                                       </button>
@@ -160,7 +159,12 @@ export default function MiniCart({ cart }) {
                                 </div>
                               </li>
                             ))}
-                          </ul>
+                              </ul> :
+                              <div>
+                                <p>Nothing in your cart!</p>
+                              </div>
+                          }
+                          
                         </div>
                       </div>
                     </div>

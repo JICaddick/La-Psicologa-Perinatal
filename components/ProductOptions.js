@@ -7,7 +7,7 @@ export default function ProductOptions({
   setOptions,
 }) {
   return (
-    <fieldset>
+    <fieldset className="mt-3">
       <legend className="text-xl font-semibold">{name}</legend>
       <div className="inline-flex items-center flex-wrap">
         {values.map((value) => {
@@ -27,7 +27,7 @@ export default function ProductOptions({
                 onChange={() => setOptions(name, value)}
               />
               <div
-                className={`p-2 my-3 text-lg rounded-full block cursor-pointer mr-3 ${
+                className={`p-2 mt-3 text-lg rounded-full block cursor-pointer mr-3 ${
                   checked
                     ? "text-white bg-gray-900"
                     : "text-gray-900 bg-grey-200"
