@@ -8,6 +8,7 @@ export default function ShopProvider({ children }) {
     const [cartOpen, setCartOpen] = useState(false)
     const [checkoutId, setCheckoutId] = useState('')
     const [checkoutUrl, setCheckoutUrl] = useState('')
+    const [cartLoading, setCartLoading] = useState(false)
 // the empty array in useEffect means the function will only trigger once.
     useEffect(() => {
         if (localStorage.checkout_id) {
@@ -44,7 +45,7 @@ export default function ShopProvider({ children }) {
         } else {
             let newCart = []
             let added = false
-// here w're checking if the id of the new item already exists in the car. It if does exist we'll increase the quantity of the variant quantity in the cart. If it doesn't already exist we'll add it to the cart and set the new cart to the state.
+// here w're checking if the id of the new item already exists in the cart. It if does exist we'll increase the quantity of the variant quantity in the cart. If it doesn't already exist we'll add it to the cart and set the new cart to the state.
             cart.map(item => {
                 if (item.id === newItem.id) {
                     item.variantQuantity++
@@ -151,7 +152,7 @@ export default function ShopProvider({ children }) {
         checkoutUrl,
         removeCartItem,
         clearCart,
-        // cartLoading,
+        cartLoading,
         incrementCartItem,
         decrementCartItem,
       }}

@@ -1,4 +1,4 @@
-// We're using this page to get the static paths and then we're getting the static props that we're then passing to our product page function through which we're passing the prodcut to the product page content component. 
+// We're using this page to get the static paths and then we're getting the static props that we're then passing to our product page function through which we're passing the product to the product page content component. 
 import ProductPageContent from "../../components/ProductPageContent";
 import { getAllProducts, getProduct } from "../../lib/shopify";
 //deleted products from shopify

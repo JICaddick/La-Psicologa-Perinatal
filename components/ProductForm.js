@@ -9,7 +9,7 @@ export default function ProductForm({ product }) {
 
     const allVariantOptions = product.variants.edges?.map(variant => {
         const allOptions = {}
-        
+        // console.log('allVariantOptions', allVariantOptions)   
         variant.node.selectedOptions.map(item => {
             allOptions[item.name] = item.value
         })
@@ -18,7 +18,7 @@ export default function ProductForm({ product }) {
             id: variant.node.id,
             title: product.title,
             handle: product.handle,
-            image: variant.node.image?.URL,
+            image: variant.node.image?.originalSrc,
             options: allOptions,
             variantTitle: variant.node.title,
             variantPrice: variant.node.priceV2.amount,

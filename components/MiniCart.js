@@ -14,8 +14,8 @@ export default function MiniCart({ cart }) {
       setCartOpen,
       checkoutUrl,  
       removeCartItem,
-      // incrementCartItem,
-      // decrementCartItem,
+      incrementCartItem,
+      decrementCartItem,
     } = useContext(CartContext)
     // if there are items in the cart, we'll map through them and create a list of items. We'll multiply the price by the quantity to get the total price for each item.
     let cartTotal = 0
@@ -23,6 +23,7 @@ export default function MiniCart({ cart }) {
         cartTotal += item?.variantPrice * item?.variantQuantity
     })
 
+  console.log(cart)
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
       <Dialog
