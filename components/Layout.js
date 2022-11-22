@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from './Nav'
+import Footer from './Footer'
 // our whole application will be the child of this component
 
 export default function Layout({ children}) {
@@ -11,9 +12,7 @@ export default function Layout({ children}) {
         {children}
       </main>
 
-      <footer>
-        Footer
-      </footer>
+      <Footer />
     </div>
   )
 }
